@@ -255,8 +255,9 @@ function HomeSection({ data, darkMode }) {
   return (
     <div style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
-      alignItems: "center", justifyContent: "center", paddingTop: 80, gap: 28,
-      padding: "74px 16px 40px",
+      alignItems: "center", justifyContent: "center", gap: 28,
+      padding: "80px 16px 40px",
+      width: "100%", boxSizing: "border-box",
     }}>
       <div style={{ position: "relative", display: "inline-block" }}>
         <div style={{
@@ -283,7 +284,7 @@ function HomeSection({ data, darkMode }) {
         }}>✨</div>
       </div>
 
-      <div style={{ textAlign: "center", maxWidth: 520, width: "100%" }}>
+      <div style={{ textAlign: "center", maxWidth: 520, width: "100%", padding: "0 4px" }}>
         <h1 style={{
           fontFamily: "'Playfair Display', serif",
           fontSize: "clamp(26px, 7vw, 48px)", margin: "0 0 8px",
@@ -300,7 +301,7 @@ function HomeSection({ data, darkMode }) {
       </div>
 
       <div style={{
-        display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, width: "100%", maxWidth: 520,
+        display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10, width: "100%", maxWidth: 520,
       }}>
         {[
           { label: "Major", value: data.major },
@@ -314,8 +315,8 @@ function HomeSection({ data, darkMode }) {
             border: dm ? "1.5px solid #4a2070" : "1.5px solid #f0d6ff",
             boxShadow: "0 4px 20px rgba(180,100,220,0.08)",
           }}>
-            <div style={{ fontFamily: "'Nunito', sans-serif", fontSize: 10, color: "#c77dff", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>{label}</div>
-            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, color: dm ? "#d4a8ff" : "#7a4d9e", marginTop: 4 }}>{value}</div>
+            <div style={{ fontFamily: "'Nunito', sans-serif", fontSize: "clamp(8px, 2.5vw, 10px)", color: "#c77dff", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>{label}</div>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(11px, 3vw, 14px)", color: dm ? "#d4a8ff" : "#7a4d9e", marginTop: 4 }}>{value}</div>
           </div>
         ))}
       </div>
@@ -1141,6 +1142,7 @@ export default function App() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { overflow-x: hidden; }
         body {
           background: ${dm
             ? "linear-gradient(135deg,#0f0a1a 0%,#1a0d2e 40%,#120820 100%)"
@@ -1149,6 +1151,7 @@ export default function App() {
           transition: background 0.4s ease;
           color: ${dm ? "#e8d5ff" : "inherit"};
           overflow-x: hidden;
+          width: 100%;
         }
         @keyframes floatUp { from { transform: translateY(0); } to { transform: translateY(-12px); } }
         @keyframes petalFloat { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-18px) rotate(20deg); } }
@@ -1170,7 +1173,7 @@ export default function App() {
       {PETAL_POSITIONS.map((p, i) => <FloatingPetal key={i} {...p} />)}
       <Navbar active={active} setActive={setActive} setAdminOpen={handleAdminClick} name={data.name} darkMode={dm} toggleDarkMode={() => setDarkMode(v => !v)} />
 
-      <div style={{ maxWidth: 900, margin: "0 auto", position: "relative", zIndex: 1, width: "100%", overflowX: "hidden" }}>
+      <div style={{ maxWidth: 900, margin: "0 auto", position: "relative", zIndex: 1, width: "100%", overflowX: "hidden", boxSizing: "border-box" }}>
         {active === "Home" && <HomeSection data={data} darkMode={dm} />}
         {active === "Intro" && <IntroSection data={data} darkMode={dm} />}
         {active === "Assessment" && <AssessmentSection data={data} darkMode={dm} />}
